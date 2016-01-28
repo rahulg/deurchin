@@ -31,9 +31,3 @@ function stripUrchins(details) {
 	return {redirectUrl: newUri};
 
 }
-
-chrome.webRequest.onBeforeSendHeaders.addListener(
-	stripUrchins,
-	{urls: ["<all_urls>"]},
-	["blocking"]
-);

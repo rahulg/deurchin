@@ -3,15 +3,13 @@
 	"name": "De-urchin",
 	"description": "Strips various analytics fragments from URIs.",
 	"version": "1.0",
-	"applications": {
-		"gecko": {
-			"id": "deurchin@rahulg.io",
-		}
-	},
 	"permissions": [
 		"webRequest", "webRequestBlocking", "<all_urls>"
 	],
 	"background": {
-		"scripts": ["deurchin.js"]
+		"scripts": [
+			"deurchin.js",
+			"deurchin-chrome.js"
+		]
 	}
 }
