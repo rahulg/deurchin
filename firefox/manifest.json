@@ -5,7 +5,7 @@
 	"version": "1.0",
 	"applications": {
 		"gecko": {
-			"id": "deurchin@rahulg.io",
+			"id": "deurchin@rahulg.io"
 		}
 	},
 	"permissions": [
