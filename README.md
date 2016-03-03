@@ -14,7 +14,7 @@ This plugin gets rid of them.
 
 Chrome: [Chrome Web Store](https://chrome.google.com/webstore/detail/kojlolmppeefdcgjjegaoldegjphhjfg)
 
-Firefox: WebExtensions can't be uploaded to addons.mozilla.org yet. Hold tight, or build it yourself.
+Firefox: [Mozilla Addons](https://addons.mozilla.org/en-US/firefox/addon/de-urchin/)
 
 # Build
 
