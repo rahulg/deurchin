@@ -14,7 +14,7 @@ This plugin gets rid of them.
 
 Chrome: [Chrome Web Store](https://chrome.google.com/webstore/detail/kojlolmppeefdcgjjegaoldegjphhjfg)
 
-Firefox: [Mozilla Addons](https://addons.mozilla.org/en-US/firefox/addon/de-urchin/)
+Firefox: [Mozilla Addons](https://addons.mozilla.org/en-US/firefox/addon/deurchin/)
 
 # Build
 

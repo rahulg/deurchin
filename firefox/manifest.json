@@ -1,8 +1,8 @@
 {
 	"manifest_version": 2,
-	"name": "De-urchin",
+	"name": "Deurchin",
 	"description": "Strips various analytics fragments from URIs.",
-	"version": "1.0",
+	"version": "1.0.1",
 	"applications": {
 		"gecko": {
 			"id": "deurchin@rahulg.io"
