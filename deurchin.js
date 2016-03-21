@@ -22,6 +22,10 @@ var filters = [
 	{
 		urls: ["<all_urls>"],
 		fn: filterParams("utm_(?:content|campaign|source|medium)")
+	},
+	{
+		urls: ["*://*.aliexpress.com/*"],
+		fn: filterParams("(?:ws_ab_test|btsid)")
 	}
 ];
 
