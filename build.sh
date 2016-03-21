@@ -1,11 +1,12 @@
 #!/usr/bin/env bash
 set -e -u
 
+version=$(git describe --tags --always --abbrev=7)
+
 function build() {
 
-	browser=${1:-firefox}
-	version=$(git describe --tags --always --abbrev=7)
-	product=""
+	local browser=${1:-firefox}
+	local product=""
 	case $browser in
 		firefox)
 			product=deurchin.xpi
@@ -21,13 +22,20 @@ function build() {
 
 	mkdir -vp build/${browser}
 	cp -v deurchin.js build/${browser}/
-	manifest >build/${browser}/manifest.json
+	manifest ${browser} >build/${browser}/manifest.json
 
 	zip -j build/${product} build/${browser}/*
 
 }
 
 function manifest() {
+
+	local browser=${1:-firefox}
+
+	if [[ ${browser} = chrome ]]; then
+		local version=$(echo ${version} | grep -oE '^[0-9.]+')
+	fi
+
 	cat <<-EOF
 	{
 		"name": "Deurchin",
@@ -57,6 +65,7 @@ function manifest() {
 		"manifest_version": 2
 	}
 	EOF
+
 }
 
 case ${1:-all} in
