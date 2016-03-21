@@ -1,27 +1,27 @@
 "use strict";
 
-var urchins = /([?&])utm_(?:content|campaign|source|medium)=[^&#]+/g;
+function filterParams(pattern) {
+	var first = new RegExp("\\\?" + pattern + "=[^&#]*&", "g");
+	var rest = new RegExp("&" + pattern + "=[^&#]*", "g");
 
-function stripUrchins(details) {
+	return function(details) {
 
-	function replaceSeparator(match, sep) {
-		return sep === "?" ? "?" : "";
+		var newUrl = details.url
+			.replace(first, "?")
+			.replace(rest, "");
+
+		if (newUrl !== details.url) {
+			return {redirectUrl: newUrl};
+		}
+
+		return {};
 	}
-
-	var newUrl = details.url.replace(urchins, replaceSeparator);
-
-	if (newUrl !== details.url) {
-		return {redirectUrl: newUrl};
-	}
-
-	return {};
-
 }
 
-var listeners = [
+var filters = [
 	{
 		urls: ["<all_urls>"],
-		fn: stripUrchins
+		fn: filterParams("utm_(?:content|campaign|source|medium)")
 	}
 ];
 
@@ -33,10 +33,10 @@ function event() {
 	}
 }
 
-for (var idx = 0; idx < listeners.length; idx++) {
+for (var idx = 0; idx < filters.length; idx++) {
 	event().addListener(
-		listeners[idx].fn,
-		{urls: listeners[idx].urls},
+		filters[idx].fn,
+		{urls: filters[idx].urls},
 		["blocking"]
 	);
 }
