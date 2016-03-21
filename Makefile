@@ -1,30 +1,24 @@
-XPI=deurchin.xpi
-CRX=deurchin.zip
 SOURCES=deurchin.js
-SOURCES_FFX=$(SOURCES) \
-            deurchin-firefox.js
-SOURCES_CHR=$(SOURCES) \
-            deurchin-chrome.js
 
 .PHONY: all clean
 
-all: $(XPI) $(CRX)
+all: build/deurchin.xpi build/deurchin.zip
 
-$(XPI): build/firefox
+build/deurchin.xpi: build/firefox
 	zip -j $@ $^/*
 
-$(CRX): build/chrome
+build/deurchin.zip: build/chrome
 	zip -j $@ $^/*
 
-build/firefox: $(SOURCES_FFX)
+build/firefox: $(SOURCES)
 	mkdir -p $@
 	cp $^ $@
 	./manifest.sh firefox >$@/manifest.json
 
-build/chrome: $(SOURCES_CHR)
+build/chrome: $(SOURCES)
 	mkdir -p $@
 	cp $^ $@
 	./manifest.sh chrome >$@/manifest.json
 
 clean:
-	rm -rf build $(XPI) $(CRX)
+	rm -rf build

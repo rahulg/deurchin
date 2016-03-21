@@ -17,8 +17,7 @@ cat <<EOF
 	"description": "Strips various analytics fragments from URIs.",
 	"background": {
 		"scripts": [
-			"deurchin.js",
-			"deurchin-${browser}.js"
+			"deurchin.js"
 		]
 	},
 	"permissions": [

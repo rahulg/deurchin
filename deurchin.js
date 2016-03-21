@@ -17,3 +17,26 @@ function stripUrchins(details) {
 	return {};
 
 }
+
+var listeners = [
+	{
+		urls: ["<all_urls>"],
+		fn: stripUrchins
+	}
+];
+
+function event() {
+	if (chrome.runtime.id === "deurchin@rahulg.io") {
+		return chrome.webRequest.onBeforeSendHeaders;
+	} else {
+		return chrome.webRequest.onBeforeRequest;
+	}
+}
+
+for (var idx = 0; idx < listeners.length; idx++) {
+	event().addListener(
+		listeners[idx].fn,
+		{urls: listeners[idx].urls},
+		["blocking"]
+	);
+}
