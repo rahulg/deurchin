@@ -1,14 +1,14 @@
 "use strict";
 
 function filterParams(pattern) {
-	var first = new RegExp("\\\?" + pattern + "=[^&#]*&", "g");
+	var first = new RegExp("\\\?" + pattern + "=[^&#]*&?");
 	var rest = new RegExp("&" + pattern + "=[^&#]*", "g");
 
 	return function(details) {
 
 		var newUrl = details.url
-			.replace(first, "?")
-			.replace(rest, "");
+			.replace(rest, "")
+			.replace(first, "?");
 
 		if (newUrl !== details.url) {
 			return {redirectUrl: newUrl};
