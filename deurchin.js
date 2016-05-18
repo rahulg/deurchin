@@ -21,7 +21,7 @@ function filterParams(pattern) {
 var filters = [
 	{
 		urls: ["<all_urls>"],
-		fn: filterParams("utm_(?:content|campaign|source|medium)")
+		fn: filterParams("utm_(?:content|campaign|source|medium|term)")
 	},
 	{
 		urls: ["*://*.aliexpress.com/*"],
