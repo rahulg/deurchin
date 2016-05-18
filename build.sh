@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -e -u
 
-version=$(git describe --tags --always --abbrev=7)
+version=$(git describe --tags --always --abbrev=7 --dirty)
 
 function build() {
 
