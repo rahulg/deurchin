@@ -32,16 +32,8 @@ var filters = [
 	}
 ];
 
-function event() {
-	if (chrome.runtime.id === "deurchin@rahulg.io") {
-		return chrome.webRequest.onBeforeSendHeaders;
-	} else {
-		return chrome.webRequest.onBeforeRequest;
-	}
-}
-
 for (var idx = 0; idx < filters.length; idx++) {
-	event().addListener(
+	chrome.webRequest.onBeforeRequest.addListener(
 		filters[idx].fn,
 		{urls: filters[idx].urls},
 		["blocking"]
