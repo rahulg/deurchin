@@ -6,12 +6,15 @@ function filterParams(pattern) {
 
 	return function(details) {
 
-		var newUrl = details.url
+		var url = new URL(details.url);
+		var newUrl = new URL(details.url);
+
+		newUrl.search = url.search
 			.replace(rest, "")
 			.replace(first, "?");
 
-		if (newUrl !== details.url) {
-			return {redirectUrl: newUrl};
+		if (newUrl.search !== url.search) {
+			return {redirectUrl: newUrl.href};
 		}
 
 		return {};
