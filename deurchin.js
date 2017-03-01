@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 function filterParams(pattern) {
 	return function(details) {
@@ -23,12 +23,12 @@ function filterParams(pattern) {
 
 var filters = [
 	{
-		urls: ["<all_urls>"],
-		fn: filterParams("^utm_(?:content|campaign|source|medium|term|id)")
+		urls: ['<all_urls>'],
+		fn: filterParams('^utm_(?:content|campaign|source|medium|term|id)')
 	},
 	{
-		urls: ["*://*.aliexpress.com/*"],
-		fn: filterParams("^(?:ws_ab_test|btsid)")
+		urls: ['*://*.aliexpress.com/*'],
+		fn: filterParams('^(?:ws_ab_test|btsid)')
 	}
 ];
 
@@ -36,6 +36,6 @@ for (var idx = 0; idx < filters.length; idx++) {
 	chrome.webRequest.onBeforeRequest.addListener(
 		filters[idx].fn,
 		{urls: filters[idx].urls},
-		["blocking"]
+		['blocking']
 	);
 }
