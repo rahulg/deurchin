@@ -1,34 +1,34 @@
 "use strict";
 
 function filterParams(pattern) {
-	var first = new RegExp("\\\?" + pattern + "=[^&#]*&?");
-	var rest = new RegExp("&" + pattern + "=[^&#]*", "g");
-
 	return function(details) {
 
-		var url = new URL(details.url);
-		var newUrl = new URL(details.url);
+		let url = new URL(details.url);
+		let changed = false;
 
-		newUrl.search = url.search
-			.replace(rest, "")
-			.replace(first, "?");
-
-		if (newUrl.search !== url.search) {
-			return {redirectUrl: newUrl.href};
+		for (let param of url.searchParams) {
+			if (param[0].match(pattern)) {
+				changed = true;
+				url.searchParams.delete(param[0]);
+			}
 		}
 
-		return {};
+		if (changed) {
+			return {redirectUrl: url.href};
+		} else {
+			return {};
+		}
 	}
 }
 
 var filters = [
 	{
 		urls: ["<all_urls>"],
-		fn: filterParams("utm_(?:content|campaign|source|medium|term)")
+		fn: filterParams("^utm_(?:content|campaign|source|medium|term|id)")
 	},
 	{
 		urls: ["*://*.aliexpress.com/*"],
-		fn: filterParams("(?:ws_ab_test|btsid)")
+		fn: filterParams("^(?:ws_ab_test|btsid)")
 	}
 ];
 
